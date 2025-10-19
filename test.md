@@ -1,3 +1,9 @@
-# Test
+---
+layout: default
+title: Services
+permalink: /services/
+---
 
-this is a test
+# My Services
+
+This is the content of my new page.
