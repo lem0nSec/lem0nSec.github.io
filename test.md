@@ -1,11 +1,10 @@
 ---
 layout: default
-title: Tool Descriptions
-permalink: /tools/
+title: CreateRemoteThreadPlus
+permalink: /projects/
 ---
 
 
-# CreateRemoteThreadPlus
 **CreateRemoteThread: how to pass multiple parameters to the remote thread function without shellcode.**
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
