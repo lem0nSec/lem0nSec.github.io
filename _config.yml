@@ -1,4 +1,4 @@
 title: lem0nSec | Home
 description: "Exploring Cybersecurity, Windows, and everything in between."
 plugins: 
-* jekyll-feed
+  - jekyll-feed
