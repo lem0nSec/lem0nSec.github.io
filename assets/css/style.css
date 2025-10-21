@@ -164,6 +164,18 @@ body {
     color: #666;
 }
 
+/* --- Card Links --- */
+.card-link {
+    text-decoration: none; /* Removes the default underline */
+    color: inherit; /* Makes the link use the same text color as the rest of the card */
+}
+
+.card-link .card:hover {
+    /* You can enhance the existing hover effect if you want */
+    transform: translateY(-7px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7), 0 0 20px var(--accent-color);
+}
+
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
     .hero h1 {
