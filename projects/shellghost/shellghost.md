@@ -1,12 +1,6 @@
-layout: default
-title: ShellGhost
-
 # ShellGhost
 
-
-<p align="center">
-  <img src="pictures/logo.png">
-</p>
+![](pictures/logo.png){: .center-image }
 
 
 __A memory-based evasion technique which makes shellcode invisible from process start to end.__
@@ -119,3 +113,4 @@ When it comes to evading an EDR solution, memory scanning is just part of a bigg
 
 ## Notes
 Compilation requires disabling incremental linking. This VS project has all compiler/linker options already set.
+
