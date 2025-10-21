@@ -146,6 +146,13 @@ body {
     text-align: left;
 }
 
+/* --- Utility Classes --- */
+.center-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* --- Footer --- */
 .footer {
     text-align: center;
