@@ -1,8 +1,3 @@
----
-layout: default
-title: CreateRemoteThreadPlus
----
-
 # CreateRemoteThreadPlus
 **CreateRemoteThread: how to pass multiple parameters to the remote thread function without shellcode.**
 
