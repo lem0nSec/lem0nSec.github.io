@@ -88,12 +88,7 @@ DWORD U32MessageBoxGenerateFunctionInstructions_End()
 
 
 # References
-* https://guidedhacking.com/threads/how-to-pass-multiple-arguments-with-createremotethread-to-injected-dll.15373/
-* https://stackoverflow.com/questions/25354393/passing-multiple-parameters-using-createremotethread-in-c-sharp
-* https://github.com/gentilkiwi/mimikatz
-* https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createremotethread
-
-
-
-
-
+* [](https://guidedhacking.com/threads/how-to-pass-multiple-arguments-with-createremotethread-to-injected-dll.15373/)
+* [](https://stackoverflow.com/questions/25354393/passing-multiple-parameters-using-createremotethread-in-c-sharp)
+* [](https://github.com/gentilkiwi/mimikatz)
+* [](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createremotethread)
