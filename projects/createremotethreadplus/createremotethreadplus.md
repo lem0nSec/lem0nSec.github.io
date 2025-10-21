@@ -1,9 +1,9 @@
-# CreateRemoteThreadPlus
+## CreateRemoteThreadPlus
 **CreateRemoteThread: how to pass multiple parameters to the remote thread function without shellcode.**
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## The Function
+# The Function
 As stated by the related MSDN page, the CreateRemoteThread API from kernel32.dll *creates a thread that runs in the virtual address space of another process.* This API is often used for process or shellcode injection purposes. Standard dll injection is perhaps the most common amongst these techniques. CreateRemoteThread can 'force' the remote process to load an arbitrary .dll by opening a new thread in it. The LoadLibrary address is passed to the API as LPTHREAD_START_ROUTINE (4th parameter), while a pointer to the string (.dll to be loaded) written in the remote process is passed as 5th parameter.
 
 ```c
@@ -20,7 +20,7 @@ HANDLE CreateRemoteThread(
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## The Problem
+# The Problem
 Standard .dll injection works because the LoadLibrary API expects one parameter only. But what if the remote function expects multiple parameters? What if the function is MessageBox for instance? (MessageBox expects four parameters). I wanted to create this repository because some people on the Internet have said that passing more than one argument to the remote function is impossible.
 
 ![](pictures/argument.png)
@@ -32,7 +32,7 @@ Standard .dll injection works because the LoadLibrary API expects one parameter 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## The Solution
+# The Solution
 This code shows how to handle the aforementioned situation by doing the followings:
 
 - Crafting a data structure which contains the following two sub-structures:
@@ -41,7 +41,7 @@ This code shows how to handle the aforementioned situation by doing the followin
 - Writing a function code block into the remote process. The `CreateRemoteThread` api will receive a pointer to this function as `LPTHREAD_START_ROUTINE`.
 
 
-### Creating a Data Structure that holds Parameters
+# Creating a Data Structure that holds Parameters
 MessageBox expects a HWND variable as first parameter, the second and third parameters are pointers to constant strings (messagebox text and caption), the fourth parameter is a UINT variable (content and behaviour of the messagebox). The data structure with MessageBoxA parameters will be the following:
 
 ```c
@@ -55,7 +55,7 @@ typedef struct _USER32_LIB_INPUT_DATA {
 
 The LPCSTR parameters are pointers to constant strings in the remote process. So the strings are first written into the target process with calls to `VirtualAllocEx` and `WriteProcessMemory`. After that, pointers to the strings are written into the struct. This will be eventually copied into the `input` field of the bigger `USER32_LIB_DATA` struct, which is injected into the remote process.
 
-### Creating 'Shellcode' Dynamically
+# Creating 'Shellcode' Dynamically
 The remote thread first has to execute instructions that populate the right registers with the right values from the previously written struct. The following function takes the injected `USER32_LIB_DATA` struct as input parameter. All it does is just passing the parameters in the `input` field of `USER32_LIB_DATA` to `MessageBoxA` before calling it.
 
 ```c
@@ -87,8 +87,9 @@ DWORD U32MessageBoxGenerateFunctionInstructions_End()
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-## References
+# References
 * https://guidedhacking.com/threads/how-to-pass-multiple-arguments-with-createremotethread-to-injected-dll.15373/
 * https://stackoverflow.com/questions/25354393/passing-multiple-parameters-using-createremotethread-in-c-sharp
 * https://github.com/gentilkiwi/mimikatz
 * https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createremotethread
+
