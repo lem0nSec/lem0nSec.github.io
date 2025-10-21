@@ -1,7 +1,3 @@
-This is "Front Matter" - it tells Jekyll which layout to use.
-
-layout: default title: Home
-
 <!--
 You can use HTML directly in your Markdown file for more complex sections.
 The content below is from your original file's <main> section.
