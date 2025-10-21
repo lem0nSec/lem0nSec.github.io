@@ -1,8 +1,3 @@
-# Site settings
-title: lem0nSec
+title: lem0nSec | Home
 description: "Exploring Cybersecurity, Windows, and everything in between."
-baseurl: "" # the subpath of your site, e.g. /blog. If hosted at username.github.io, keep this empty.
-url: "" # your base hostname & protocol, e.g. https://username.github.io
-
-# Build settings
-markdown: kramdown
+plugins: jekyll-feed
