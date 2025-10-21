@@ -1,4 +1,4 @@
-# ShellGhost
+## ShellGhost
 
 ![](pictures/logo.png){: .center-image }
 
@@ -6,12 +6,12 @@
 __A memory-based evasion technique which makes shellcode invisible from process start to end.__
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
-## Motivation
+# Motivation
 I wanted to share this shellcode self-injection POC to showcase some AV/EDR evasion concepts that may turn useful for Red Teaming. Just a few weeks ago I came up with a custom in-memory evasion technique which I named ShellGhost. This technique stems from the need for having __a code that executes an 'invisible' shellcode from process start to finish__.
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
-## Handling the Thread Execution Flow
+# Handling the Thread Execution Flow
 __ShellGhost relies on Vectored Exception Handling in combination with software breakpoints__ to cyclically stop thread execution, replace the executed breakpoint with a RC4-encrypted shellcode instruction, decrypt the instruction and resume execution after restoring memory protection to RX. When the subsequent EXCEPTION_BREAKPOINT is raised, the exception handler replaces the previous shellcode instruction with a new breakpoint so that the allocation will never disclose the complete shellcode in an unencrypted state. This happens inside a private memory page which is initially marked as READ/WRITE.
 Having a RW PRV allocation will not be considered an 'Indicator of Compromise' by memory scanners such as PE-Sieve and Moneta. When the allocation becomes RX and the page is scanned, nothing but breakpoints will be found. This happens while the shellcode is actually under execution. The following picture shows that a reverse shell is running, but no IOC is found by Moneta (other than the binary being unsigned).
 
@@ -26,7 +26,7 @@ Trying to scan the process with Pe-Sieve has an even better outcome:
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
-## Shellcode Mapping
+# Shellcode Mapping
 Shellcode Mapping is the core functionality of ShellGhost. This tactic enables the thread to intermittently execute instructions while never exposing the entire shellcode in memory. This is possible because the position of each single shellcode instruction that the thread executes corresponds to the position of a certain breakpoint inside the allocated memory page. ShellGhost resolves this position by calculating the Relative Virtual Address (RVA) from the thread RIP to the base address of the allocated memory page and adds it to the base address of the encrypted shellcode / encrypted instructions. The number of breakpoints that will be replaced is not always the same, but it varies depending on the number of opcodes that each instruction needs to be correctly generated and interpreted (QUOTA). So for example the instruction 'POP RBP' is equal to '5D', which means only one breakpoint will be replaced. By contrast, the instruction 'JMP RAX' requires opcodes 'FF E0', so two breakpoints will be replaced. For this reason I created the following C data structure.
 
 
@@ -56,7 +56,7 @@ buf.Length = 2 		// buffer length, or length of the instruction to be decrypted
 
 We know that shellcode instruction number 5 is composed of 2 opcodes, so a buffer length of 2 will be passed to SystemFunction032. This is important because trying to decrypt the entire shellcode with a single call to SystemFunction032 will corrupt it entirely.
 
-### How is Shellcode Mapping performed?
+# How is Shellcode Mapping performed?
 The shellcode needs to be mapped with `ShellGhost_mapping.py` before compilation. The script extracts each single instruction and treats it as a small and independent shellcode. Instructions are encrypted one by one and printed out in C format all together as unsigned char. The result can be hardcoded inside the C code. Below is an example of what an encrypted MSF shellcode instructions for calc.exe looks like.
 
 
@@ -69,7 +69,7 @@ This shellcode has 98 instructions, so 98 CRYPT_BYTES_QUOTA structs are declared
 ![](pictures/shellcode_mapping_2.png)
 
 
-## Adjusting Winapi Parameters
+# Adjusting Winapi Parameters
 Metasploit x64 shellcodes tipically have winapi string parameters stored between instructions. So to say, a MSF x64 shellcode that calls Winexec does not push a series of bytes with a nullbyte at the end to have the first parameter string on the stack. Rather, the RCX register (first parameter) is a pointer inside the shellcode itself just like the following picture. 
 
 
@@ -94,7 +94,7 @@ if ((contextRecord->Rcx >= (DWORD_PTR)allocation_base) && (contextRecord->Rcx <=
 RDX, R8 and R9 (second, third, and fourth parameters) are not covered yet.
 
 
-## Differences and Similarities with other Techniques
+# Differences and Similarities with other Techniques
 [ShellcodeFluctuation](https://github.com/mgeeky/ShellcodeFluctuation) is a very similar in-memory evasion concept. Just like it, the allocated memory here 'fluctuates' from RW to RX. In contrast, ShellGhost introduces the following improvements:
 
 * RC4 encryption plus 'Shellcode Mapping' rather than single-byte XOR
@@ -113,4 +113,5 @@ When it comes to evading an EDR solution, memory scanning is just part of a bigg
 
 ## Notes
 Compilation requires disabling incremental linking. This VS project has all compiler/linker options already set.
+
 
