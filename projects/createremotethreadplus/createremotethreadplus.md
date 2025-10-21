@@ -23,11 +23,11 @@ HANDLE CreateRemoteThread(
 # The Problem
 Standard .dll injection works because the LoadLibrary API expects one parameter only. But what if the remote function expects multiple parameters? What if the function is MessageBox for instance? (MessageBox expects four parameters). I wanted to create this repository because some people on the Internet have said that passing more than one argument to the remote function is impossible.
 
-![](pictures/argument.png)
+![](pictures/argument.png){: .center-image }
 **Figure 1. People's argument (1)**
 
 
-![](pictures/argument1.png)
+![](pictures/argument1.png){: .center-image }
 **Figure 2. People's argument (2)**
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,11 +77,11 @@ DWORD U32MessageBoxGenerateFunctionInstructions_End()
 '0x4141414141414141' is just a dummy value that will be replaced with the `MessageBoxA` address before injecting the code block. The result after code injection and remote thread creation is the following:
 
 
-![MessageBoxA instruction set](pictures/function_instruction_set.png)
+![MessageBoxA instruction set](pictures/function_instruction_set.png){: .center-image }
 **Figure 3. MessageBoxA instruction set**
 
 
-![Remote thread executes MessageBoxA](pictures/payload_execution.png)
+![Remote thread executes MessageBoxA](pictures/payload_execution.png){: .center-image }
 **Figure 4. Remote thread executes MessageBoxA**
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,4 +92,5 @@ DWORD U32MessageBoxGenerateFunctionInstructions_End()
 * https://stackoverflow.com/questions/25354393/passing-multiple-parameters-using-createremotethread-in-c-sharp
 * https://github.com/gentilkiwi/mimikatz
 * https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createremotethread
+
 
