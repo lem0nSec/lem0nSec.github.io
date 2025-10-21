@@ -24,10 +24,12 @@ I’m a Security Researcher who's passionate about programming, reverse engineer
 <div class="container">
 <h2>Featured Projects</h2>
 <div class="grid">
+  <a href="/projects/shellghost/shellghost" class="card-link">
 <div class="card">
 <h3>ShellGhost</h3>
 <p>I wanted to make a Metasploit shellcode invisible. So here's a Ghost!</p>
 </div>
+    <a href="/projects/createremotethreadplus/createremotethreadplus" class="card-link">
 <div class="card">
 <h3>CreateRemoteThreadPlus</h3>
 <p>Passing multiple parameters to a remote thread function with the CreateRemoteThread API.</p>
