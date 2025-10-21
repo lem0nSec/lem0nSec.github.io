@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- The title will come from your _config.yml file or the page's front matter -->
+    <title>{{ page.title }} | lem0nSec</title>
+    <!-- Link to your stylesheet -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo">lem0nSec</a>
+            <nav class="nav">
+                <a href="/">Home</a>
+                <a href="#">About</a>
+                <a href="#">Projects</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- This is where the content from your index.md file will be inserted -->
+        {{ content }}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 lem0nSec. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
