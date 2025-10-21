@@ -1,6 +1,6 @@
 ## ShellGhost
 
-![](pictures/logo.png){: .center-image }
+![](pictures/logo.png){: .center-image width="100%" }
 
 
 __A memory-based evasion technique which makes shellcode invisible from process start to end.__
@@ -16,13 +16,13 @@ __ShellGhost relies on Vectored Exception Handling in combination with software 
 Having a RW PRV allocation will not be considered an 'Indicator of Compromise' by memory scanners such as PE-Sieve and Moneta. When the allocation becomes RX and the page is scanned, nothing but breakpoints will be found. This happens while the shellcode is actually under execution. The following picture shows that a reverse shell is running, but no IOC is found by Moneta (other than the binary being unsigned).
 
 
-![](pictures/moneta_detection.png){: .center-image }
+![](pictures/moneta_detection.png){: .center-image width="100%" }
 
 
 Trying to scan the process with Pe-Sieve has an even better outcome:
 
 
-![](pictures/pe-sieve.png){: .center-image }
+![](pictures/pe-sieve.png){: .center-image width="100%" }
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -60,20 +60,20 @@ We know that shellcode instruction number 5 is composed of 2 opcodes, so a buffe
 The shellcode needs to be mapped with `ShellGhost_mapping.py` before compilation. The script extracts each single instruction and treats it as a small and independent shellcode. Instructions are encrypted one by one and printed out in C format all together as unsigned char. The result can be hardcoded inside the C code. Below is an example of what an encrypted MSF shellcode instructions for calc.exe looks like.
 
 
-![](pictures/shellcode_mapping_1.png){: .center-image }
+![](pictures/shellcode_mapping_1.png){: .center-image width="100%" }
 
 
 This shellcode has 98 instructions, so 98 CRYPT_BYTES_QUOTA structs are declared. When the code executes, these structs have to be populated with the proper instructions RVAs and QUOTAs. The '-1' parameter instructs the mapping script to print out the piece of code that does this.
 
 
-![](pictures/shellcode_mapping_2.png){: .center-image }
+![](pictures/shellcode_mapping_2.png){: .center-image width="100%" }
 
 
 # Adjusting Winapi Parameters
 Metasploit x64 shellcodes tipically have winapi string parameters stored between instructions. So to say, a MSF x64 shellcode that calls Winexec does not push a series of bytes with a nullbyte at the end to have the first parameter string on the stack. Rather, the RCX register (first parameter) is a pointer inside the shellcode itself just like the following picture. 
 
 
-![](pictures/msf_jmp_rax.png){: .center-image }
+![](pictures/msf_jmp_rax.png){: .center-image width="100%" }
 
 
 This means that the breakpoints whose position relates to the string will never be resolved, because the RIP will never touch that position. As a matter of fact, this code resolves actual shellcode instructions the RIP goes through, not parameters that will never be executed like instructions. To fix this, I noticed that MSF shellcodes always store a pointer to the winapi they are calling inside the RAX register, then make a jump to the register itself. So when ShellGhost VEH detects that the resolved breakpoint is 'JMP RAX' and the RCX register contains a pointer to a position inside the shellcode, it attempts to also resolve what pointed by RCX. Subsequently, execution is not returned to the allocated memory. Rather, RAX (winapi address) is copied into RIP and thread execution is resumed from the winapi, thus overriding the 'JMP RAX' and keeping the allocated memory RW. This is needed for reverse shells calling WaitForSingleObject, which would cause the thread to sleep after the 'JMP RAX' while leaving memory RX for as long as the shell remains alive. The following code snippet contains the two conditions that has to be met in order for ShellGhost to adjust the RCX register when it contains a winapi parameter string and allow the MSF shellcode to correctly issue the function call (WinExec in the example here).
@@ -105,7 +105,7 @@ RDX, R8 and R9 (second, third, and fourth parameters) are not covered yet.
 ShellGhost is far from being a perfect technique though. It still suffers from the biggest downside all these techniques have, namely __the need to have private executable memory at some point during execution__. More advanced techniques like Foliage already found a way around this. In addition, a memory allocation full of software breakpoints can be detected by a YARA rule. The following picture shows Moneta correctly detecting an IOC for the RX PRV allocation.
 
 
-![](pictures/moneta_detection_2.png){: .center-image }
+![](pictures/moneta_detection_2.png){: .center-image width="100%" }
 
 
 When it comes to evading an EDR solution, memory scanning is just part of a bigger picture. The complete absence of IOCs does not necessarily mean that a binary using this technique will prove effective against a given EDR. As far as I can tell, I experienced situations when the solution does not even allow you to launch the binary the way you're doing it. The other side of the medal is that IOCs are not always precise indicators, and some of them may turn out to be false positives. With that being said, this is just a raw technique and an inspiration which I hope the reader appreciates. The Red Teamer knows that just like the components of an EDR, in-memory evasion is only one component of the engine.
@@ -113,3 +113,4 @@ When it comes to evading an EDR solution, memory scanning is just part of a bigg
 
 ## Notes
 Compilation requires disabling incremental linking. This VS project has all compiler/linker options already set.
+
