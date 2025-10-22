@@ -176,6 +176,25 @@ body {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7), 0 0 20px var(--accent-color);
 }
 
+/* --- Project Card Tags (NEW) --- */
+.project-tags {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background-color: var(--border-color); /* Dark, subtle background */
+    color: var(--accent-color); /* Neon text */
+    padding: 4px 10px;
+    border-radius: 15px; /* Pill shape */
+    font-size: 0.8rem;
+    font-weight: bold;
+    font-family: 'Courier New', monospace; /* Match your logo font */
+    text-transform: uppercase;
+}
+
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
     .hero h1 {
