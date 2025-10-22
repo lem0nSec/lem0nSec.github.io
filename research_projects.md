@@ -99,21 +99,6 @@
 </head>
 <body>
 
-    <!-- 
-      This is the *same header* from your index page.
-      Using it on all pages creates consistent navigation.
-      The only change is the nav button now links back "Home".
-    -->
-    <header class="header">
-        <div class="container">
-            <a href="/" class="logo">lem0nSec</a>
-            <nav class="nav">
-                <!-- This button links back to your homepage -->
-                <a href="/" class="nav-button">Home</a>
-            </nav>
-        </div>
-    </header>
-
     <main>
         <!-- Main content section for all projects -->
         <section class="content-section">
