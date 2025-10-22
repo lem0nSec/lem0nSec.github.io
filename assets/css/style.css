@@ -176,6 +176,22 @@ body {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7), 0 0 20px var(--accent-color);
 }
 
+/* Style for a special navigation button */
+.nav .nav-button {
+    border: 1px solid var(--accent-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover effect for the button */
+.nav .nav-button:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-bg); /* Dark text on neon background */
+    text-shadow: none; /* Remove text glow for better readability */
+}
+
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
     .hero h1 {
