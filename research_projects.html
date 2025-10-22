@@ -2,11 +2,100 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
     <title>Projects | lem0nS' Playground</title>
     
     <!-- Link to your existing stylesheet -->
     <link rel="stylesheet" href="/assets/css/style.css">
+
+    <!-- 
+      NEW STYLES for the horizontal project list.
+      These use the CSS variables from your main style.css.
+    -->
+    <style>
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px; /* Spacing between project rows */
+        }
+
+        .project-row-link {
+            text-decoration: none;
+            color: inherit;
+            display: block; /* Makes the whole area clickable */
+        }
+
+        .project-row {
+            /* Using variables from your style.css */
+            background-color: var(--secondary-bg, #1a1a1a);
+            padding: 25px 30px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color, #333);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            
+            /* Horizontal layout */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allows wrapping on small screens */
+            gap: 20px; /* Space between info and tags */
+        }
+
+        .project-row:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-color, #ccff00);
+        }
+
+        .project-row-info {
+            flex-grow: 1; /* Takes up available space */
+        }
+
+        .project-row-info h3 {
+            margin: 0 0 10px 0;
+            color: #ffffff;
+            font-size: 1.6rem;
+        }
+
+        .project-row-info p {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--light-text-color, #a0a0a0);
+            max-width: 500px; /* Keeps description neat */
+        }
+        
+        /* Styles for Project Tags */
+        .project-tags {
+            margin-top: 0; /* No top margin needed in this layout */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            flex-shrink: 0; /* Prevents tags from shrinking */
+        }
+
+        .tag {
+            background-color: var(--border-color, #333);
+            color: var(--accent-color, #ccff00);
+            padding: 4px 10px;
+            border-radius: 15px; /* Pill shape */
+            font-size: 0.8rem;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        /* Responsive adjustments for the row */
+        @media (max-width: 768px) {
+            .project-row {
+                flex-direction: column; /* Stack vertically on mobile */
+                align-items: flex-start; /* Align content to the left */
+            }
+            
+            .project-row .project-tags {
+                margin-top: 20px; /* Add space between info and tags */
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -38,18 +127,21 @@
                 </p>
 
                 <!-- 
-                  This uses the *same* .grid and .card classes 
-                  from your homepage for a consistent look.
+                  UPDATED STRUCTURE:
+                  This now uses .project-list and .project-row
+                  instead of .grid and .card.
                 -->
-                <div class="grid">
+                <div class="project-list">
 
                     <!-- Project 1: ShellGhost -->
-                    <a href="/projects/shellghost/shellghost" class="card-link">
-                        <div class="card">
-                            <h3>ShellGhost</h3>
-                            <p>A proof-of-concept project aimed at making Metasploit shellcode invisible to certain detection mechanisms.</p>
-                            
-                            <!-- These are the new "fancy" tags -->
+                    <a href="/projects/shellghost/shellghost" class="project-row-link">
+                        <div class="project-row">
+                            <!-- Project Info -->
+                            <div class="project-row-info">
+                                <h3>ShellGhost</h3>
+                                <p>A proof-of-concept project aimed at making Metasploit shellcode invisible to certain detection mechanisms.</p>
+                            </div>
+                            <!-- Project Tags -->
                             <div class="project-tags">
                                 <span class="tag">C++</span>
                                 <span class="tag">Windows API</span>
@@ -60,11 +152,14 @@
                     </a>
 
                     <!-- Project 2: CreateRemoteThreadPlus -->
-                    <a href="/projects/createremotethreadplus/createremotethreadplus" class="card-link">
-                        <div class="card">
-                            <h3>CreateRemoteThreadPlus</h3>
-                            <p>An exploration of passing multiple parameters to a remote thread, extending the standard capabilities of the CreateRemoteThread API.</p>
-                            
+                    <a href="/projects/createremotethreadplus/createremotethreadplus" class="project-row-link">
+                        <div class="project-row">
+                            <!-- Project Info -->
+                            <div class="project-row-info">
+                                <h3>CreateRemoteThreadPlus</h3>
+                                <p>An exploration of passing multiple parameters to a remote thread, extending the standard capabilities of the CreateRemoteThread API.</p>
+                            </div>
+                            <!-- Project Tags -->
                             <div class="project-tags">
                                 <span class="tag">C++</span>
                                 <span class="tag">Windows Internals</span>
@@ -77,18 +172,21 @@
                       Here is a placeholder for your next project.
                       Just copy and paste this block to add more.
                     -->
-                    <a href="#" class="card-link">
-                        <div class="card">
-                            <h3>Future Project</h3>
-                            <p>A description of another awesome project will go here. This card is ready and waiting for your next idea.</p>
-                            
+                    <a href="#" class="project-row-link">
+                        <div class="project-row">
+                            <!-- Project Info -->
+                            <div class="project-row-info">
+                                <h3>Future Project</h3>
+                                <p>A description of another awesome project will go here. This list is ready and waiting for your next idea.</p>
+                            </div>
+                            <!-- Project Tags -->
                             <div class="project-tags">
                                 <span class="tag">Coming Soon</span>
                             </div>
                         </div>
                     </a>
 
-                </div> <!-- .grid ends -->
+                </div> <!-- .project-list ends -->
             </div> <!-- .container ends -->
         </section> <!-- .content-section ends -->
     </main>
@@ -102,3 +200,4 @@
 
 </body>
 </html>
+
