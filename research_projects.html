@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | lem0nS' Playground</title>
+    
+    <!-- Link to your existing stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <!-- 
+      This is the *same header* from your index page.
+      Using it on all pages creates consistent navigation.
+      The only change is the nav button now links back "Home".
+    -->
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo">lem0nS</a>
+            <nav class="nav">
+                <!-- This button links back to your homepage -->
+                <a href="/" class="nav-button">Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Main content section for all projects -->
+        <section class="content-section">
+            <div class="container">
+                
+                <!-- The main title, styled by your .content-section h2 rule -->
+                <h2>Project Archive</h2>
+                <p style="text-align: center; max-width: 600px; margin: -30px auto 50px auto; color: var(--light-text-color);">
+                    A collection of all my experiments and research projects. 
+                    Feel free to browse and explore the code.
+                </p>
+
+                <!-- 
+                  This uses the *same* .grid and .card classes 
+                  from your homepage for a consistent look.
+                -->
+                <div class="grid">
+
+                    <!-- Project 1: ShellGhost -->
+                    <a href="/projects/shellghost/shellghost" class="card-link">
+                        <div class="card">
+                            <h3>ShellGhost</h3>
+                            <p>A proof-of-concept project aimed at making Metasploit shellcode invisible to certain detection mechanisms.</p>
+                            
+                            <!-- These are the new "fancy" tags -->
+                            <div class="project-tags">
+                                <span class="tag">C++</span>
+                                <span class="tag">Windows API</span>
+                                <span class="tag">Assembly</span>
+                                <span class="tag">Security</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 2: CreateRemoteThreadPlus -->
+                    <a href="/projects/createremotethreadplus/createremotethreadplus" class="card-link">
+                        <div class="card">
+                            <h3>CreateRemoteThreadPlus</h3>
+                            <p>An exploration of passing multiple parameters to a remote thread, extending the standard capabilities of the CreateRemoteThread API.</p>
+                            
+                            <div class="project-tags">
+                                <span class="tag">C++</span>
+                                <span class="tag">Windows Internals</span>
+                                <span class="tag">Reverse Engineering</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 
+                      Here is a placeholder for your next project.
+                      Just copy and paste this block to add more.
+                    -->
+                    <a href="#" class="card-link">
+                        <div class="card">
+                            <h3>Future Project</h3>
+                            <p>A description of another awesome project will go here. This card is ready and waiting for your next idea.</p>
+                            
+                            <div class="project-tags">
+                                <span class="tag">Coming Soon</span>
+                            </div>
+                        </div>
+                    </a>
+
+                </div> <!-- .grid ends -->
+            </div> <!-- .container ends -->
+        </section> <!-- .content-section ends -->
+    </main>
+
+    <!-- This is the same footer from your style.css -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 lem0nS. All experiments are for educational purposes.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
