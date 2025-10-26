@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - lem0nSec</title>
+    <!-- 
+      This <style> block contains the *exact same* CSS as your index.html
+      to ensure the pages look identical.
+    -->
+    <style>
+        /* --- Basic Reset & Typography --- */
+        body {
+            font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace; /* Techy, code-like font */
+            margin: 0;
+            padding: 0;
+            background-color: #0d0d0d; /* Even darker background */
+            color: #d0d0d0; /* Slightly desaturated light text */
+            line-height: 1.6;
+        }
+
+        /* --- Custom Variables for easy theming --- */
+        :root {
+            --primary-bg: #0d0d0d;
+            --secondary-bg: #1a1a1a;
+            --accent-color: #ccff00; /* Neon Lemon Green */
+            --text-color: #d0d0d0;
+            --light-text-color: #a0a0a0;
+            --border-color: #333333;
+        }
+
+        /* --- Container for Centering Content --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header & Navigation --- */
+        .header {
+            background-color: var(--secondary-bg);
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--accent-color); /* Stronger accent border */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Courier New', monospace; /* Distinct, code-style font for logo */
+            font-weight: bold;
+            font-size: 1.7rem; /* Slightly larger logo */
+            color: var(--accent-color);
+            text-decoration: none;
+            text-shadow: 0 0 5px rgba(204, 255, 0, 0.7); /* Subtle neon glow */
+        }
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 25px; /* More spacing */
+            transition: color 0.3s, text-shadow 0.3s;
+            font-size: 1rem;
+        }
+
+        .nav a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 8px rgba(204, 255, 0, 0.8); /* Glow on hover */
+        }
+        
+        /* Style for the *active* page link */
+        .nav a.active {
+            color: var(--accent-color);
+            text-shadow: 0 0 8px rgba(204, 255, 0, 0.8);
+        }
+
+        /* --- Main Content & Sections --- */
+        main {
+            display: block;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 100px 20px; /* More vertical padding */
+            background: linear-gradient(rgba(13, 13, 13, 0.9), rgba(13, 13, 13, 0.9)), url('https://placehold.co/1920x1080/000000/333333?text=Contact+Me') no-repeat center center/cover;
+            position: relative;
+            z-index: 1; 
+        }
+        .hero::before { 
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: -1;
+        }
+
+
+        .hero h1 {
+            font-size: 3.2rem; /* <-- REDUCED SIZE */
+            margin-bottom: 15px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--light-text-color);
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .content-section {
+            padding: 60px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .content-section h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            text-shadow: 0 0 7px rgba(204, 255, 0, 0.6);
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            color: var(--light-text-color);
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* MODIFIED: Set to 3 explicit columns */
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--secondary-bg);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out; /* MODIFIED */
+            height: 100%; /* Makes cards in a grid row the same height */
+            box-sizing: border-box; /* Includes padding in height calculation */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-color);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #ffffff;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        /* ADDED: Style for card icons */
+        .card h3 svg {
+            transition: fill 0.3s ease-in-out;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: var(--light-text-color);
+            text-align: left;
+        }
+
+        /* --- Utility Classes --- */
+        .center-image {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            background-color: var(--secondary-bg);
+            border-top: 2px solid var(--accent-color);
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* --- Card Links --- */
+        .card-link {
+            text-decoration: none; /* Removes the default underline */
+            color: inherit; /* Makes the link use the same text color as the rest of the card */
+            display: block; /* Ensures the link fills the grid area */
+            height: 100%; /* Ensures the link fills the card wrapper */
+        }
+
+        .card-link .card:hover {
+            /* You can enhance the existing hover effect if you want */
+            transform: translateY(-8px); /* MODIFIED */
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.8), 0 0 25px var(--accent-color); /* MODIFIED */
+            border-color: var(--accent-color); /* ADDED */
+        }
+
+        /* ADDED: Icon color change on hover */
+        .card-link:hover .card h3 svg {
+            fill: var(--accent-color);
+        }
+
+        /* --- Project Card Tags (NEW) --- */
+        .project-tags {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background-color: var(--border-color); /* Dark, subtle background */
+            color: var(--accent-color); /* Neon text */
+            padding: 4px 10px;
+            border-radius: 15px; /* Pill shape */
+            font-size: 0.8rem;
+            font-weight: bold;
+            font-family: 'Courier New', monospace; /* Match your logo font */
+            text-transform: uppercase;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem; /* <-- REDUCED SIZE */
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .content-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header .container {
+                flex-direction: column;
+            }
+            .nav {
+                margin-top: 20px;
+            }
+            .nav a {
+                margin: 0 10px;
+            }
+            .hero {
+                padding: 60px 20px;
+            }
+            .hero h1 {
+                font-size: 2.2rem; /* <-- REDUCED SIZE */
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .content-section {
+                padding: 30px 0;
+            }
+            .content-section h2 {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section with Navigation -->
+    <header class="header">
+        <div class="container">
+            <!-- Logo links to the main page -->
+            <a href="index.html" class="logo">lem0nSec</a>
+            
+            <!-- Navigation -->
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="contact.html" class="active">Contact</a> <!-- 'active' class highlights this page -->
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- A simple hero for the contact page -->
+        <section class="hero">
+            <h1>Get in Touch</h1>
+            <p>Connect with me on social media and professional networks.</p>
+        </section>
+
+        <!-- Contact links section, using the same "grid" and "card" styles -->
+        <section class="content-section">
+            <div class="container">
+                <h2>Find Me Online</h2>
+                <div class="grid">
+
+                    <!-- GitHub Card -->
+                    <a href="https://github.com/lem0nSec" target="_blank" rel="noopener noreferrer" class="card-link">
+                        <div class="card">
+                            <!-- MODIFIED: Added flex display and SVG icon -->
+                            <h3 style="display: flex; align-items: center; gap: 12px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="GitHub logo"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297 24 5.67 18.63 0 12 .297z"/></svg>
+                                <span>GitHub</span>
+                            </h3>
+                            <p>Explore my projects, code repositories, and contributions. This is where most of my work lives.</p>
+                        </div>
+                    </a>
+
+                    <!-- LinkedIn Card -->
+                    <!-- TODO: Remember to replace this with your actual LinkedIn URL -->
+                    <a href="https://www.linkedin.com/in/YOUR_USERNAME" target="_blank" rel="noopener noreferrer" class="card-link">
+                        <div class="card">
+                            <!-- MODIFIED: Added flex display and SVG icon -->
+                            <h3 style="display: flex; align-items: center; gap: 12px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="LinkedIn logo"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                <span>LinkedIn</span>
+                            </h3>
+                            <p>Connect with me for professional inquiries, networking, and to see my career profile.</p>
+                        </div>
+                    </a>
+                    
+                    <!-- Twitter Card -->
+                    <!-- TODO: Remember to replace this with your actual Twitter URL -->
+                    <a href="https://twitter.com/YOUR_USERNAME" target="_blank" rel="noopener noreferrer" class="card-link">
+                        <div class="card">
+                            <!-- MODIFIED: Added flex display and SVG icon -->
+                            <h3 style="display: flex; align-items: center; gap: 12px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="X (formerly Twitter) logo"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                                <span>Twitter / X</span>
+                            </h3>
+                            <p>Follow me for real-time thoughts, research updates, and industry news.</p>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2025 lem0nSec. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
+
+
+
